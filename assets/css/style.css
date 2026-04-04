@@ -1,0 +1,228 @@
+/**
+ * Polaris Stylesheet
+ * 
+ * Bevat custom stijlen bovenop Tailwind CSS.
+ * Bijna alles wordt via Tailwind gedaan, dit is puur voor extra dingen
+ * 
+ */
+
+/* ============================================
+   Basis & Reset
+   ============================================ */
+
+/* Soepel scrollen voor de volledige pagina */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Zorg dat tekst-selectie bij het thema past */
+::selection {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: inherit;
+}
+
+/* 
+   Custom Animaties
+ */
+
+/* Fade-in bij het laden van de pagina */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Subtiele float-animatie voor decoratieve elementen */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Puls glow animatie */
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px 5px rgba(59, 130, 246, 0.15);
+    }
+}
+
+/* Slide-in van links voor sidebar (enkel voor telefoon etc) */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Animatieklassen */
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Staggered animatie delays voor cards */
+.stagger-1 {
+    animation-delay: 0.1s;
+}
+
+.stagger-2 {
+    animation-delay: 0.2s;
+}
+
+.stagger-3 {
+    animation-delay: 0.3s;
+}
+
+.stagger-4 {
+    animation-delay: 0.4s;
+}
+
+/* 
+   Navbar stijlen
+ */
+
+/* Actieve navigatielink indicator */
+.nav-link.active {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 
+   Sidebar stijlen
+ */
+
+/* Sidebar open state op mobiel */
+#sidebar.sidebar-open {
+    transform: translateX(0);
+}
+
+/* Sidebar link hover effect */
+.sidebar-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: #3b82f6;
+    border-radius: 0 3px 3px 0;
+    transition: height 0.2s ease;
+}
+
+.sidebar-link:hover::before {
+    height: 60%;
+}
+
+/* Verberg de indicator bij een actieve link (die heeft al een gekleurde achtergrond) */
+.sidebar-link.bg-accent::before {
+    display: none;
+}
+
+/* 
+   Login stijlen
+*/
+
+/* Input focus-glow */
+input:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 
+   Dashboard tabel stijlen
+*/
+
+/* Tabel rij hover-transitie */
+table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+/* 
+   Scrollbar styling (WebKit browsers)
+*/
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Donkere scrollbar voor de sidebar */
+#sidebar ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#sidebar ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 
+   Toegankelijkheid
+*/
+
+/* Duidelijke focus-ring voor toetsenbordnavigatie */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* 
+   Responsive tweaks
+*/
+
+/* Voorkom horizontale overflow op mobiel */
+body {
+    overflow-x: hidden;
+}
+
+/* Dashboard body heeft GEEN overflow-x hidden nodig (flex layout) */
+body.dashboard-body {
+    overflow: hidden;
+}
