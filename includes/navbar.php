@@ -18,12 +18,12 @@
                     class="nav-link text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">Home</a>
                 <a href="#features"
                     class="nav-link text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">Features</a>
-                <a href="#"
+                <a href="#preview"
                     class="nav-link text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">Meldingen</a>
-                <a href="#"
+                <a href="/contact.php"
                     class="nav-link text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">Contact</a>
                 <div class="ml-3 pl-3 border-l border-white/20">
-                    <a href="#"
+                    <a href="/login.php"
                         class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg shadow-accent/25 hover:shadow-accent/40">
                         Aanmelden
                     </a>
@@ -51,9 +51,9 @@
                 class="block text-white/80 hover:text-white hover:bg-white/10 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200">Home</a>
             <a href="#features"
                 class="block text-white/80 hover:text-white hover:bg-white/10 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200">Features</a>
-            <a href="#"
+            <a href="#preview"
                 class="block text-white/80 hover:text-white hover:bg-white/10 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200">Meldingen</a>
-            <a href="#"
+            <a href="/contact.php"
                 class="block text-white/80 hover:text-white hover:bg-white/10 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200">Contact</a>
             <div class="pt-2">
                 <a href="#"
