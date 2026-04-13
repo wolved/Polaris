@@ -1,7 +1,6 @@
 <!-- 
     Sidebar Module
     Herbruikbare sidebar voor het interne dashboard.
-    Wordt ingeladen in dashboard-pagina's via: include '../includes/sidebar.php';
 -->
 <?php
 // Bepaal de huidige pagina voor actieve link-markering

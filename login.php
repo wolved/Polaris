@@ -2,8 +2,7 @@
 /**
  * Loginpagina
  * 
- * Nog geen echte authenticatie
- * !nog niet afgewerkt
+ * Nog geen echte authenticatie, alleen voor demo
  */
 
 $pageTitle = 'Inloggen';
@@ -11,11 +10,10 @@ $pageTitle = 'Inloggen';
 
 <?php include 'includes/header.php'; ?>
 
-<!-- Login wrapper: full-screen donkere achtergrond -->
 <div
     class="min-h-screen flex items-center justify-center bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 relative overflow-hidden">
 
-    <!-- Decoratieve achtergrond-elementen -->
+    <!-- Decoratieve achtergrond elementen -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-1/4 -left-20 w-80 h-80 bg-accent rounded-full blur-3xl"></div>
         <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent-light rounded-full blur-3xl"></div>
@@ -143,14 +141,14 @@ $pageTitle = 'Inloggen';
             </div>
         </div>
 
-        <!-- Onderaan: disclaimer -->
+        <!-- Disclaimer -->
         <p class="text-center text-xs text-white/40 mt-6">
-            &copy; <?php echo date('Y'); ?> Polaris &mdash; Fictief portaal, geen officiële overheidsdienst.
+            &copy; <?php echo date('Y'); ?> Polaris. Fictief portaal, geen officiële overheidsdienst.
         </p>
     </div>
 </div>
 
-<!-- Eigen JavaScript -->
+<!-- Eigen JavaScript, app.js bevat alle generieke functies -->
 <script src="/assets/js/app.js"></script>
 </body>
 

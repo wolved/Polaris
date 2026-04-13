@@ -1,7 +1,6 @@
 <!-- 
     Header Module
-    Bevat: doctype, html, head, meta tags, Tailwind CDN, eigen CSS, en opent body.
-    Included bovenaan elke pagina via: include 'includes/header.php';
+    Included bovenaan elke pagina.
 -->
 <!DOCTYPE html>
 <html lang="nl" class="scroll-smooth">
