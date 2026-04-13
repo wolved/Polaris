@@ -71,7 +71,7 @@ $recenteMeldingen = [
         <!-- Scrollbare content -->
         <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-slate-50">
 
-            <!-- ==================== STAT CARDS ==================== -->
+            <!-- STAT CARDS, met open meldingen, actieve interventies, geregistreerde personen en voertuigen in systeem -->
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
 
                 <!-- Card: Open meldingen -->
@@ -143,7 +143,7 @@ $recenteMeldingen = [
                 </div>
             </div>
 
-            <!-- ==================== RECENTE MELDINGEN ==================== -->
+            <!-- RECENTE MELDINGEN, met tabel van laatste 5 meldingen -->
             <div class="bg-white rounded-2xl border border-slate-200/80 mb-8">
                 <!-- Tabel header -->
                 <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
@@ -229,7 +229,7 @@ $recenteMeldingen = [
                 </div>
             </div>
 
-            <!-- ==================== SNELLE ACTIES ==================== -->
+            <!-- SNELLE ACTIES, met knoppen voor nieuwe melding, persoon opzoeken en verslag opstellen -->
             <div class="bg-white rounded-2xl border border-slate-200/80 p-6">
                 <h2 class="text-base font-bold text-navy-900 mb-1">Snelle acties</h2>
                 <p class="text-sm text-slate-500 mb-5">Veelgebruikte bewerkingen snel starten</p>
