@@ -5,6 +5,29 @@
 <?php
 // Bepaal de huidige pagina voor actieve link-markering
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
+
+// Haal het aantal open meldingen op voor de badge.
+// db.php is via de parentpagina al geladen; require_once is veilig.
+require_once __DIR__ . '/db.php';
+
+$badgeMeldingen = 0;
+try {
+    $badgeMeldingen = (int) getPDO()
+        ->query("SELECT COUNT(*) FROM reports WHERE status = 'open'")
+        ->fetchColumn();
+} catch (RuntimeException) {
+    // Toon geen badge als de DB niet bereikbaar is
+}
+
+// Ingelogde gebruiker uit sessie (ingesteld door login.php)
+$sessieNaam    = htmlspecialchars($_SESSION['user_full_name'] ?? 'Onbekend', ENT_QUOTES, 'UTF-8');
+$sessieRol     = htmlspecialchars($_SESSION['user_role']      ?? '',         ENT_QUOTES, 'UTF-8');
+
+// Initialen voor de avatar: eerste letter van voor- en achternaam
+$naamDelen  = explode(' ', trim($_SESSION['user_full_name'] ?? 'U'));
+$initialen  = strtoupper(
+    ($naamDelen[0][0] ?? 'U') . (count($naamDelen) > 1 ? end($naamDelen)[0] : '')
+);
 ?>
 
 <!-- Mobiele overlay (verborgen standaard) -->
@@ -47,8 +70,11 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
             Meldingen
-            <!-- Badge voor aantal meldingen -->
-            <span class="ml-auto bg-red-500/20 text-red-400 text-xs font-bold px-2 py-0.5 rounded-full">12</span>
+            <?php if ($badgeMeldingen > 0): ?>
+                <span class="ml-auto bg-red-500/20 text-red-400 text-xs font-bold px-2 py-0.5 rounded-full">
+                    <?php echo $badgeMeldingen; ?>
+                </span>
+            <?php endif; ?>
         </a>
 
         <a href="/dashboard/persons.php"
@@ -80,8 +106,8 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 
         <p class="px-3 pt-5 text-[10px] uppercase tracking-widest text-white/30 font-semibold mb-2">Systeem</p>
 
-        <a href="#"
-            class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-all duration-200">
+        <a href="/dashboard/settings.php"
+            class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 <?php echo $currentPage === 'settings' ? 'bg-accent text-white shadow-lg shadow-accent/25' : 'text-white/60 hover:text-white hover:bg-white/10'; ?>">
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -97,13 +123,13 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
         <div
             class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-colors duration-200 cursor-pointer">
             <div class="w-9 h-9 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span class="text-accent font-bold text-sm">JD</span>
+                <span class="text-accent font-bold text-sm"><?php echo $initialen; ?></span>
             </div>
             <div class="flex-1 min-w-0">
-                <p class="text-white text-sm font-medium truncate">Jan De Vries</p>
-                <p class="text-white/40 text-xs truncate">Operateur</p>
+                <p class="text-white text-sm font-medium truncate"><?php echo $sessieNaam; ?></p>
+                <p class="text-white/40 text-xs truncate"><?php echo $sessieRol; ?></p>
             </div>
-            <a href="/login.php" class="text-white/40 hover:text-red-400 transition-colors" title="Uitloggen">
+            <a href="/actions/logout_action.php" class="text-white/40 hover:text-red-400 transition-colors" title="Uitloggen">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

@@ -16,6 +16,8 @@
             <div class="hidden md:flex items-center gap-1">
                 <a href="/"
                     class="nav-link text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">Home</a>
+                <a href="/about.php"
+                    class="nav-link text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">Over</a>
                 <a href="#features"
                     class="nav-link text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">Features</a>
                 <a href="#preview"
