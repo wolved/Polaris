@@ -13,14 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// ── Sanitisatie ────────────────────────────────────────────────
+// Sanitisatie
 $name    = trim(strip_tags($_POST['name']    ?? ''));
 $email   = trim(strip_tags($_POST['email']   ?? ''));
 $subject = trim(strip_tags($_POST['subject'] ?? ''));
 $message = trim(strip_tags($_POST['message'] ?? ''));
 $privacy = isset($_POST['privacy']);
 
-// ── Validatie ──────────────────────────────────────────────────
+// Validatie
 $errors = [];
 
 if (empty($name)) {
@@ -44,15 +44,14 @@ if (!$privacy) {
     $errors[] = 'Privacybeleid niet geaccepteerd.';
 }
 
-// Bij fouten: redirect met error-status
+// Redirect met error-status bij fouten
 if (!empty($errors)) {
     header('Location: /contact.php?status=error');
     exit;
 }
 
-// ── Verwerking ─────────────────────────────────────────────────
-// Simuleer e-mail: log de inzending naar een bestand.
-// In productie zou hier mail() of een SMTP-bibliotheek staan.
+// Verwerking
+// Simuleert email, maar logt de inzending gewoon nr bestand
 $logDir  = __DIR__ . '/logs';
 $logFile = $logDir . '/contact.log';
 
@@ -66,6 +65,6 @@ $logEntry   = "[{$timestamp}] Van: {$name} <{$email}> | Onderwerp: {$subject} | 
 
 file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX);
 
-// ── Redirect naar succespagina ─────────────────────────────────
+// Redirect naar succespagina
 header('Location: /contact.php?status=success');
 exit;
