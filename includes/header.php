@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Polaris - Centraal interventie- en meldingsportaal voor operationeel beheer en coördinatie.">
+        content="Polaris, een fictief centraal interventie- en meldingsportaal voor operationeel beheer en coördinatie.">
     <meta name="author" content="Polaris">
     <title><?php echo isset($pageTitle) ? $pageTitle . ' - Polaris' : 'Polaris - Interventieportaal'; ?></title>
 
