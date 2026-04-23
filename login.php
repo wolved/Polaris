@@ -1,9 +1,59 @@
 <?php
 /**
  * Loginpagina
- * 
- * Nog geen echte authenticatie, alleen voor demo
+ *
+ * Verwerkt het inlogformulier en start een sessie bij succes.
  */
+
+session_start();
+
+// Al ingelogd? Doorsturen naar dashboard
+if (!empty($_SESSION['user_id'])) {
+    header('Location: /dashboard/');
+    exit;
+}
+
+require_once __DIR__ . '/includes/db.php';
+
+$loginFout = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $gebruikersnaam = trim($_POST['username'] ?? '');
+    $wachtwoord     = $_POST['password'] ?? '';
+
+    if ($gebruikersnaam !== '' && $wachtwoord !== '') {
+        try {
+            // Haal de gebruiker op via gebruikersnaam
+            $stmt = getPDO()->prepare(
+                "SELECT id, username, password, full_name, role
+                 FROM users
+                 WHERE username = ?
+                 LIMIT 1"
+            );
+            $stmt->execute([$gebruikersnaam]);
+            $user = $stmt->fetch();
+
+            // Controleer wachtwoord
+            if ($user && password_verify($wachtwoord, $user['password'])) {
+                // Sessie regenereren
+                session_regenerate_id(true);
+
+                $_SESSION['user_id']        = $user['id'];
+                $_SESSION['user_username']  = $user['username'];
+                $_SESSION['user_full_name'] = $user['full_name'];
+                $_SESSION['user_role']      = $user['role'];
+
+                header('Location: /dashboard/');
+                exit;
+            }
+        } catch (RuntimeException) {
+            // DB-fout
+        }
+    }
+
+    // Ongeldige gegevens
+    $loginFout = true;
+}
 
 $pageTitle = 'Inloggen';
 ?>
@@ -36,8 +86,8 @@ $pageTitle = 'Inloggen';
                 <p class="text-slate-500 text-sm">Intern interventie- en meldingsportaal</p>
             </div>
 
-            <!-- Foutmelding placeholder (verborgen standaard) -->
-            <div id="login-error" class="hidden mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+            <!-- Foutmelding: zichtbaar bij mislukte loginpoging -->
+            <div id="login-error" class="<?php echo $loginFout ? '' : 'hidden'; ?> mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
                 <div class="flex items-center gap-3">
                     <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
@@ -49,7 +99,7 @@ $pageTitle = 'Inloggen';
             </div>
 
             <!-- Login formulier -->
-            <form action="#" method="POST" class="space-y-5">
+            <form action="/login.php" method="POST" class="space-y-5">
 
                 <!-- Gebruikersnaam -->
                 <div>
