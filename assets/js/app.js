@@ -11,6 +11,7 @@
  * - Smooth scroll voor ankerlinks
  * - Wachtwoord toggle (login)
  * - Klok (dashboard topbar)
+ * word nog aangevuldd
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -188,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (scrollNav) {
 
-        // Secties die gevolgd worden (id → weergavenaam in tooltip)
+        // Secties die gevolgd worden (id weergavenaam in tooltip)
         const NAV_SECTIONS = [
             { id: 'hero',         label: 'Start'        },
             { id: 'features',     label: 'Functies'     },
